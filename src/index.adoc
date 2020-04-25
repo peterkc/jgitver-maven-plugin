@@ -1,0 +1,37 @@
+= jgitver: project versioning like a [.line-through]#geek# git
+Matthieu Brouillard <matthieu@brouillard.fr>
+:toc: left
+include::attributes.adoc[]
+:docinfo:
+:sectnums:
+:toclevels: 2
+:toc-title: Contents
+:experimental:
+:description: documentation for jgitver related projects
+:keywords: jgitver git porject version versioning
+:jgitver-oss-root: https://github.com/jgitver
+:jgitver-doc: {jgitver-oss-root}/jgitver.github.io
+:jgitver-lib: {jgitver-oss-root}/jgitver
+:jgitver-maven-plugin: {jgitver-oss-root}/jgitver-maven-plugin
+:jgitver-gradle-plugin: {jgitver-oss-root}/gradle-jgitver-plugin
+
+// based on http://mgreau.com/posts/2016/03/28/asciidoc-to-gh-pages-with-travis-ci-docker-asciidoctor.html
+
+image::jgitver_black.png[jgitver logo,200,role="right"]
+
+{jgitver-doc}[jgitver] consists of a set of library and plugins allowing to automatically compute project versions based on:
+
+- git history
+- git tags (annotated & lightweight)
+- git branches
+- configuration (predefined or explicit)
+
+include::about.adoc[leveloffset=+1]
+
+include::quickstart.adoc[leveloffset=+1]
+
+include::user_documentation.adoc[leveloffset=+1]
+
+include::developer_documentation.adoc[leveloffset=+1]
+
+include::support.adoc[leveloffset=+1]

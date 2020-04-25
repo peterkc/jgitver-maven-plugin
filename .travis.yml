@@ -1,0 +1,30 @@
+sudo: required
+
+services:
+- docker
+
+if: branch = docs
+
+before_install:
+- mkdir -p src/output
+- docker pull asciidoctor/docker-asciidoctor
+
+script:
+- docker run -v $PWD/src:/documents/ --name asciidoc-to-html asciidoctor/docker-asciidoctor asciidoctor -D /documents/output index.adoc
+- docker run -v $PWD/src:/documents/ --name asciidoc-to-pdf asciidoctor/docker-asciidoctor asciidoctor-pdf -a allow-uri-read -D /documents/output index.adoc
+
+after_error:
+- docker logs asciidoc-to-html
+- docker logs asciidoc-to-pdf
+
+after_failure:
+- docker logs asciidoc-to-html
+- docker logs asciidoc-to-pdf
+
+after_success:
+- cd $PWD/src/output ; cp -R ../images images ; cp -R ../../maven maven
+- git init
+- git config user.name "travis-ci for ${GH_USER_NAME}"
+- git config user.email "${GH_USER_EMAIL}"
+- git add . ; git commit -m "Deploy to GitHub Pages"
+- git push --force --quiet "https://${GH_TOKEN}@${GH_REF}" master:master > /dev/null 2>&1
